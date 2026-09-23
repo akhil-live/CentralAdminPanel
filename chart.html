@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="shortcut icon" href="static/images/logo/favicon.png" type="image/png"/>
+    <link href="static/fonts/noto-sans-v42-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="static/remixicon/remixicon.css">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem("admin-theme");
+            const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const theme = savedTheme || (prefersDark ? "dark" : "light");
+            document.documentElement.setAttribute("data-theme", theme);
+        })();
+    </script>
+    <link rel="stylesheet" href="static/css/admin.css">
+    <style>
+        body { font-family: 'Noto sans', sans-serif; }
+        @font-face {
+            font-family: "remixicon";
+            src: url('static/remixicon/remixicon.woff2') format("woff2");
+            font-display: swap;
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 300;
+            src: url('static/fonts/noto-sans-v42-latin-300.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: url('static/fonts/noto-sans-v42-latin-regular.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: italic;
+            font-weight: 400;
+            src: url('static/fonts/noto-sans-v42-latin-italic.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 500;
+            src: url('static/fonts/noto-sans-v42-latin-500.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 600;
+            src: url('static/fonts/noto-sans-v42-latin-600.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 700;
+            src: url('static/fonts/noto-sans-v42-latin-700.woff2') format('woff2'); 
+        }
+        @font-face {
+            font-display: swap; 
+            font-family: 'Noto Sans';
+            font-style: normal;
+            font-weight: 800;
+            src: url('static/fonts/noto-sans-v42-latin-800.woff2') format('woff2'); 
+        }
+    </style>
+</head>
+<body class="sidebar-collapsed">
+    <div class="app-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <div class="brand-icon">
+                    <img src="static/images/logo/logo.png" alt="navbar brand" class="navbar-brand" height="40">
+                </div>
+                <span class="brand-text">Portal Name</span>
+            </a>
+                <button type="button" class="icon-btn mobile-sidebar-close" id="mobileSidebarClose" aria-label="Close navigation">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 17.9996V19.9996H3V17.9996H21ZM7 3.5V13.5L2 8.49955L7 3.5ZM21 10.9996V12.9996H12V10.9996H21ZM21 3.99955V5.99955H12V3.99955H21Z"></path></svg>
+                </button>
+        </div>
+
+        <nav>
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">
+                    Navigation
+                </div>
+                <a href="index.html" class="sidebar-link active" data-page="Dashboard">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 21C13.4477 21 13 20.5523 13 20V12C13 11.4477 13.4477 11 14 11H20C20.5523 11 21 11.4477 21 12V20C21 20.5523 20.5523 21 20 21H14ZM4 13C3.44772 13 3 12.5523 3 12V4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V12C11 12.5523 10.5523 13 10 13H4ZM9 11V5H5V11H9ZM4 21C3.44772 21 3 20.5523 3 20V16C3 15.4477 3.44772 15 4 15H10C10.5523 15 11 15.4477 11 16V20C11 20.5523 10.5523 21 10 21H4ZM5 19H9V17H5V19ZM15 19H19V13H15V19ZM13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V8C21 8.55228 20.5523 9 20 9H14C13.4477 9 13 8.55228 13 8V4ZM15 5V7H19V5H15Z"></path></svg>
+                    <span class="sidebar-label">Dashboard</span>
+                </a>
+                <a href="applications.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.75 2.5C9.09721 2.5 11 4.40279 11 6.75V11H6.75C4.40279 11 2.5 9.09721 2.5 6.75C2.5 4.40279 4.40279 2.5 6.75 2.5ZM9 9V6.75C9 5.50736 7.99264 4.5 6.75 4.5C5.50736 4.5 4.5 5.50736 4.5 6.75C4.5 7.99264 5.50736 9 6.75 9H9ZM6.75 13H11V17.25C11 19.5972 9.09721 21.5 6.75 21.5C4.40279 21.5 2.5 19.5972 2.5 17.25C2.5 14.9028 4.40279 13 6.75 13ZM6.75 15C5.50736 15 4.5 16.0074 4.5 17.25C4.5 18.4926 5.50736 19.5 6.75 19.5C7.99264 19.5 9 18.4926 9 17.25V15H6.75ZM17.25 2.5C19.5972 2.5 21.5 4.40279 21.5 6.75C21.5 9.09721 19.5972 11 17.25 11H13V6.75C13 4.40279 14.9028 2.5 17.25 2.5ZM17.25 9C18.4926 9 19.5 7.99264 19.5 6.75C19.5 5.50736 18.4926 4.5 17.25 4.5C16.0074 4.5 15 5.50736 15 6.75V9H17.25ZM13 13H17.25C19.5972 13 21.5 14.9028 21.5 17.25C21.5 19.5972 19.5972 21.5 17.25 21.5C14.9028 21.5 13 19.5972 13 17.25V13ZM15 15V17.25C15 18.4926 16.0074 19.5 17.25 19.5C18.4926 19.5 19.5 18.4926 19.5 17.25C19.5 16.0074 18.4926 15 17.25 15H15Z"></path></svg>
+                    <span class="sidebar-label">Applications</span>
+                </a>
+                <a href="stats-tiles.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 5V19H19V5H5ZM4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3ZM13 10V17H11V10H7V8H17V10H13Z"></path></svg>
+                    <span class="sidebar-label">Stats Tiles</span>
+                </a>
+                <a href="form.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 2V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7V2H17ZM7 6H5V20H19V6H17V8H7V6ZM9 16V18H7V16H9ZM9 13V15H7V13H9ZM9 10V12H7V10H9ZM15 4H9V6H15V4Z"></path></svg>
+                    <span class="sidebar-label">Forms</span>
+                </a>
+                <a href="heading.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 11V4H19V21H17V13H7V21H5V4H7V11H17Z"></path></svg>
+                    <span class="sidebar-label">Heading</span>
+                </a>
+                <a href="buttons.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12C17 14.7614 14.7614 17 12 17Z"></path></svg>
+                    <span class="sidebar-label">Buttons</span>
+                </a>
+                <a href="badge.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.3414 4C13.1203 4.62556 13 5.29873 13 6H5V20H19V12C19.7013 12 20.3744 11.8797 21 11.6586V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V5C3 4.44772 3.44772 4 4 4H13.3414ZM19 8C20.1046 8 21 7.10457 21 6C21 4.89543 20.1046 4 19 4C17.8954 4 17 4.89543 17 6C17 7.10457 17.8954 8 19 8ZM19 10C16.7909 10 15 8.20914 15 6C15 3.79086 16.7909 2 19 2C21.2091 2 23 3.79086 23 6C23 8.20914 21.2091 10 19 10Z"></path></svg>
+                    <span class="sidebar-label">Badge</span>
+                </a>
+                <a href="alert.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.8659 3.00017L22.3922 19.5002C22.6684 19.9785 22.5045 20.5901 22.0262 20.8662C21.8742 20.954 21.7017 21.0002 21.5262 21.0002H2.47363C1.92135 21.0002 1.47363 20.5525 1.47363 20.0002C1.47363 19.8246 1.51984 19.6522 1.60761 19.5002L11.1339 3.00017C11.41 2.52187 12.0216 2.358 12.4999 2.63414C12.6519 2.72191 12.7782 2.84815 12.8659 3.00017ZM4.20568 19.0002H19.7941L11.9999 5.50017L4.20568 19.0002ZM10.9999 16.0002H12.9999V18.0002H10.9999V16.0002ZM10.9999 9.00017H12.9999V14.0002H10.9999V9.00017Z"></path></svg>
+                    <span class="sidebar-label">Alert</span>
+                </a>
+                <a href="alert-popup.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 7H13V9H11V7ZM11 11H13V17H11V11Z"></path></svg>
+                    <span class="sidebar-label">Alert Popup</span>
+                </a>
+                <a href="notification-msg.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.45455 19L2 22.5V4C2 3.44772 2.44772 3 3 3H21C21.5523 3 22 3.44772 22 4V18C22 18.5523 21.5523 19 21 19H6.45455ZM5.76282 17H20V5H4V18.3851L5.76282 17ZM11 10H13V12H11V10ZM7 10H9V12H7V10ZM15 10H17V12H15V10Z"></path></svg>
+                    <span class="sidebar-label">Notification Message</span>
+                </a>
+                <button
+                    type="button" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#tables" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 8H20V5H4V8ZM14 19V10H10V19H14ZM16 19H20V10H16V19ZM8 19V10H4V19H8ZM3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3Z"></path></svg>
+                    <span class="sidebar-label">Tables</span>
+                    <svg class="sidebar-toggle-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path></svg>
+                </button>
+                <div class="collapse" id="tables">
+                    <div class="submenu">
+                        <a href="table-basic.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Basic Table</span>
+                        </a>
+                        <a href="table-advance.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Advance Table</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="chart.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3V19H21V21H3V3H5ZM20.2929 6.29289L21.7071 7.70711L16 13.4142L13 10.415L8.70711 14.7071L7.29289 13.2929L13 7.58579L16 10.585L20.2929 6.29289Z"></path></svg>
+                    <span class="sidebar-label">Chart</span>
+                </a>
+                <a href="login.html" class="sidebar-link">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2C18.5523 2 19 2.44772 19 3V10H17V4H7V20H12V22H6C5.44772 22 5 21.5523 5 21V3C5 2.44772 5.44772 2 6 2H18ZM18 12C19.6569 12 21 13.3431 21 15V16H22V21C22 21.5523 21.5523 22 21 22H15C14.4477 22 14 21.5523 14 21V16H15V15C15 13.3431 16.3431 12 18 12ZM20 18H16V20H20V18ZM18 14C17.4919 14 17 14.45 17 15V16H19V15C19 14.4477 18.5523 14 18 14Z"></path></svg>
+                    <span class="sidebar-label">Login</span>
+                </a>
+                <button
+                    type="button" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#tabs" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 4.99509C3 3.89323 3.89262 3 4.99509 3H19.0049C20.1068 3 21 3.89262 21 4.99509V19.0049C21 20.1068 20.1074 21 19.0049 21H4.99509C3.89323 21 3 20.1074 3 19.0049V4.99509ZM5 5V19H19V5H5ZM7.97216 18.1808C7.35347 17.9129 6.76719 17.5843 6.22083 17.2024C7.46773 15.2753 9.63602 14 12.1022 14C14.5015 14 16.6189 15.2071 17.8801 17.0472C17.3438 17.4436 16.7664 17.7877 16.1555 18.0718C15.2472 16.8166 13.77 16 12.1022 16C10.3865 16 8.87271 16.8641 7.97216 18.1808ZM12 13C10.067 13 8.5 11.433 8.5 9.5C8.5 7.567 10.067 6 12 6C13.933 6 15.5 7.567 15.5 9.5C15.5 11.433 13.933 13 12 13ZM12 11C12.8284 11 13.5 10.3284 13.5 9.5C13.5 8.67157 12.8284 8 12 8C11.1716 8 10.5 8.67157 10.5 9.5C10.5 10.3284 11.1716 11 12 11Z"></path></svg>
+                    <span class="sidebar-label">Tabs & Profile</span>
+                    <svg class="sidebar-toggle-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path></svg>
+                </button>
+                <div class="collapse" id="tabs">
+                    <div class="submenu">
+                        <a href="tabs.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Tabs</span>
+                        </a>
+                        <a href="profile.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Profile Add</span>
+                        </a>
+                        <a href="profile-view.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Profile View</span>
+                        </a>
+                    </div>
+                </div>
+                <button
+                    type="button" class="sidebar-link" data-bs-toggle="collapse" data-bs-target="#errorPages" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 9H14V4H5V11.8571L6.5 13.25L10 9.5L13 14.5L15 12L18 15L15 14.5L13 17L10 13L7 16.5L5 15.25V20H19V9ZM21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8Z"></path></svg>
+                    <span class="sidebar-label">Error Pages</span>
+                    <svg class="sidebar-toggle-arrow" viewBox="0 0 24 24" fill="currentColor"><path d="M11.9999 13.1714L16.9497 8.22168L18.3639 9.63589L11.9999 15.9999L5.63599 9.63589L7.0502 8.22168L11.9999 13.1714Z"></path></svg>
+                </button>
+                <div class="collapse" id="errorPages">
+                    <div class="submenu">
+                        <a href="error-403.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Error 403</span>
+                        </a>
+                        <a href="error-404.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Error 404</span>
+                        </a>
+                        <a href="error-500.html" class="sidebar-link">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"></path></svg>
+                            <span class="sidebar-label">Error 500</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </aside>
+        <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+
+    <!-- MAIN WRAPPER -->
+    <div class="main-wrapper">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-inner">
+                <button type="button" class="icon-btn" id="sidebarToggle" aria-label="Toggle navigation sidebar" aria-expanded="true" data-bs-toggle-tooltip="tooltip" title="Navigation">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 18V20H6V18H18ZM21 11V13H3V11H21ZM18 4V6H6V4H18Z"></path></svg>
+                </button>
+
+               <div class="header-actions">
+                    <!-- Theme Mode -->
+                    <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle light and dark mode" data-bs-toggle-tooltip="tooltip" data-bs-placement="bottom" title="Theme">
+                    <i class="ri-moon-clear-line" id="themeIcon"></i>
+                    </button>
+                    <!-- User -->
+                    <div class="dropdown" data-bs-toggle-tooltip="tooltip" data-bs-placement="right" title="User">
+
+                        <button type="button" class="user-button dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="avatar">AN</span>
+
+                            <span class="userBlock">
+                                <span class="user-name d-block">
+                                    Admin Name
+                                </span>
+
+                                <span class="user-role d-block">
+                                    Administrator
+                                </span>
+                            </span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+                            <li class="ps-1 uName">
+                                <span class="dropdown-item">
+                                    <span class="user-name d-block">
+                                        Admin Name
+                                    </span>
+    
+                                    <span class="user-role d-block">
+                                        Administrator
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="uNameDivider">
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="profile.html">
+                                    <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"></path></svg>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="#change-password">
+                                    <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8H20C20.5523 8 21 8.44772 21 9V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V9C3 8.44772 3.44772 8 4 8H6V7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7V8ZM5 10V20H19V10H5ZM11 14H13V16H11V14ZM7 14H9V16H7V14ZM15 14H17V16H15V14ZM16 8V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8H16Z"></path></svg>
+                                    Change Password
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-danger" href="#logout">
+                                    <svg class="me-1 mb-1" viewBox="0 0 24 24" fill="currentColor"><path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path></svg>
+                                    Logout
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <!-- Theme Mode -->
+                    <button type="button" class="icon-btn" id="logout" aria-label="Logout" data-bs-toggle-tooltip="tooltip" data-bs-placement="bottom" title="Logout">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 22C4.44772 22 4 21.5523 4 21V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V6H18V4H6V20H18V18H20V21C20 21.5523 19.5523 22 19 22H5ZM18 16V13H11V11H18V8L23 12L18 16Z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTENT -->
+        <main class="content">
+            <!-- Breadcrumb -->
+             <section class="page-inner d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-3">
+                 <div class="page-heading">
+                     <h1 class="page-title">Chart</h1>
+                     <nav aria-label="breadcrumb">
+                         <ol class="breadcrumb">
+                             <li class="breadcrumb-item">
+                                 <a href="index.html">Dashboard</a>
+                             </li>
+                             <li class="breadcrumb-item">
+                                Chart
+                             </li>
+                         </ol>
+                     </nav>
+                 </div>
+             </section>
+ 
+             <section class="mb-4">
+                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                     <section class="mb-4">
+                         <div class="row g-3">
+                             <!-- Revenue -->
+                             <div class="col-12 col-xl-8">
+                                 <div class="card chart-card">
+                                     <div class="chart-header">
+                                         <div>
+                                             <h3 class="chart-title">
+                                                 Collection Overview
+                                             </h3>
+                                             <div class="chart-subtitle">
+                                                 Monthly Collection performance
+                                             </div>
+                                         </div>
+                                         <select class="form-select form-select-sm" id="collectionPeriod" style="width:90px;" aria-label="Collection period">
+                                             <option value="2026">2026</option>
+                                             <option value="2025">2025</option>
+                                             <option value="2024">2024</option>
+                                         </select>
+                                     </div>
+                                     <div class="chart-container">
+                                         <canvas id="collectionChart"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+                             <!-- Survey -->
+                             <div class="col-12 col-xl-4">
+                                 <div class="card chart-card">
+                                     <div class="chart-header">
+                                         <div>
+                                             <h3 class="chart-title">
+                                                 Survey
+                                             </h3>
+                                             <div class="chart-subtitle">
+                                                 Weekly Survey
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="chart-container">
+                                         <canvas id="surveyChart"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+         
+                             <!-- User growth -->
+                             <div class="col-12 col-lg-7">
+                                 <div class="card chart-card">
+                                     <div class="chart-header">
+                                         <div>
+                                             <h3 class="chart-title">
+                                                 Consumer Growth
+                                             </h3>
+                                             <div class="chart-subtitle">
+                                                 New consumers
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="chart-container">
+                                         <canvas id="consumerGrowthChart"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+         
+                             <!-- Traffic -->
+                             <div class="col-12 col-lg-5">
+                                 <div class="card chart-card">
+                                     <div class="chart-header">
+                                         <div>
+                                             <h3 class="chart-title">
+                                                 Mode of Payment Received in Percentage
+                                             </h3>
+                                             <div class="chart-subtitle">
+                                                 Collection Mode
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="chart-container">
+                                         <canvas id="modeChart"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </section>
+ 
+                 </div>
+             </section>
+         </main>
+
+   </div>
+
+    </div>
+
+    <!-- TOAST -->
+    <div id="toastContainer" class="toast-container position-fixed top-0 end-0 p-0" style="margin-top: 20px; margin-right: 10px; z-index: 1090;">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js" integrity="sha512-5AcaBUUUU/lxSEeEcruOIghqABnXF8TWqdIDXBZ2SNEtrTGvD408W/ShtKZf0JNjQUfOiRBJP+yHk6Ab2eFw3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="static/js/chart/chart.min.js"></script>
+    <script src="static/js/chart/chart.umd.min.js"></script>
+    <script src="static/js/datatables/datatables.min.js"></script>
+    <script src="static/js/sweetalert/sweetalert.min.js"></script>
+    <script src="static/js/admin.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            initCharts();
+        });
+    </script>
+</body>
+</html>
