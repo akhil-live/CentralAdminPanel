@@ -611,6 +611,18 @@ document.querySelectorAll('input[type="datetime-local"]').forEach(input => {
 });
 
 /*=======================================================
+    Print
+========================================================== */
+function printTable(areaID) 
+    {
+        var printContent = document.getElementById(areaID).innerHTML;
+        var originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+    }
+
+/*=======================================================
     App Descriptive Toggle
 ========================================================== */
 function initSwitchDesciptionView() {
